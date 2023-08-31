@@ -18,6 +18,7 @@
     <!-- threejs -->
     <script src="https://cdn.rawgit.com/mrdoob/three.js/r117/build/three.min.js"></script>
     <script src="https://cdn.rawgit.com/mrdoob/three.js/r117/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/r117/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdn.rawgit.com/mrdoob/three.js/r117/examples/js/controls/OrbitControls.js"></script>
     <!-- app.js -->
     <script src="./app.js"></script>
@@ -73,6 +74,14 @@
 
       // Set the camera position
       camera.position.z = 5;
+
+      //low poly island
+      const loader = new THREE.GLTFLoader();
+      loader.load('./models/lowpoly_island/scene.gltf', function ( gltf ) {
+
+		scene.add( gltf.scene );
+        
+      })
 
       // Render the scene
       function render() {
