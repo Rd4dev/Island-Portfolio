@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rd | Portfolio</title>
+    <link rel="stylesheet" href="./style.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+    <!-- drawsvgp -->
+    <script src="https://cartomanzia-tarocchi.com/wp-content/plugins/giochi-carte/public/js/DrawSVGPlugin.min.js"></script>
+    <script src="https://cartomanzia-tarocchi.com/wp-content/plugins/giochi-carte/public/js/tarocchi-zingara-build.js"></script>
+    <!-- gasp -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>  
+    <!-- threejs -->
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/r117/build/three.min.js"></script>
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/r117/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/r117/examples/js/controls/OrbitControls.js"></script>
+    <!-- app.js -->
+    <script src="./app.js"></script>
+
+</head>
+<body>
+    <div>
+    <h2>Three JS</h2>
+    <canvas id="scene">
+    <script>
+      // Create a scene
+      const scene = new THREE.Scene();
+
+      // Create a camera
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+
+      // Create a renderer
+      const renderer = new THREE.WebGLRenderer({alpha: true});
+      renderer.setSize(window.innerWidth / 1.5, window.innerHeight / 1.5);
+      document.body.appendChild(renderer.domElement);
+
+      //orbit controls
+      var controls = new THREE.OrbitControls(camera, renderer.domElement)
+
+      // Create a sphere geometry
+      const sphereGeometry = new THREE.SphereGeometry(1.5, 32, 16);
+
+      // Create a material for the sphere
+      const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true });
+
+      // Create a mesh by combining the geometry and material
+      const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+      // Add the sphere to the scene
+      scene.add(sphere);
+
+      // Create a cube geometry
+      const cubeGeometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+
+      // Create a material for the cube
+      const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true });
+
+      // Create a mesh by combining the geometry and material
+      const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+
+      // Add the cube to the scene
+      scene.add(cube);
+
+      // Set the camera position
+      camera.position.z = 5;
+
+      // Render the scene
+      function render() {
+        requestAnimationFrame(render);
+
+        //sphere rotation
+        sphere.rotation.x += 0.004;
+        sphere.rotation.y += 0.004
+
+        //cube rotation
+        cube.rotation.x += 0.005;
+        cube.rotation.y += 0.005;
+        renderer.render(scene, camera);
+      }
+      render();
+    </script>
+
+    </canvas>
+    </div>
+</body>
+</html>
